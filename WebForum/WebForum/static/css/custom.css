@@ -1,0 +1,12 @@
+li a:hover{
+    color: #e86000!important;
+}
+li a{
+    color: #777777!important;
+}
+.navbar.navbar-inverse{
+    background-color: #222!important;
+}
+body{
+    background-color: #111;
+}
