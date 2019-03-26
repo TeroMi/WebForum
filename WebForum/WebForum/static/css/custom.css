@@ -1,12 +1,44 @@
-li a:hover{
-    color: #e86000!important;
+body{
+    background-color: #111;
 }
-li a{
+
+p{
+    color: #444;
+}
+
+a:hover{
+    color: #e86000!important;
+    text-decoration: underline!important;
+}
+
+a{
     color: #777777!important;
 }
+
 .navbar.navbar-inverse{
     background-color: #222!important;
 }
-body{
-    background-color: #111;
+.dropdown-menu{
+    background-color: #222!important;
+}
+.dropdown-menu li a:hover{
+    background-color: #111!important;
+}
+
+textarea{
+    background-color: #222!important;
+    border: 1px solid #555 !important;
+    color: #555!important;
+}
+textarea:focus{
+    border: 1px solid #e86000!important;
+    box-shadow: 0 0 10px #e86000!important;
+    outline: none !important;
+}
+textarea:active{
+    border: 1px solid #e86000!important;
+}
+::selection{
+    background-color: #e86000!important;
+    color: #000!important;
 }
