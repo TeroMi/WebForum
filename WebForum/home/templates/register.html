@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Register</h2>
+    <form method="post">
+      {% csrf_token %}
+      {% for field in form %}
+      <div class="fieldWrapper">
+        {{ field.label_tag }}<br>
+        {{ field }}
+        {% if field.help_text %}
+        <p class="helpText">{{ field.help_text }}</p>
+        {% endif %}
+        {% for error in field.errors %}
+        <p class="errorText">{{ error }}</p>
+        {% endfor %}
+      </div>
+      {% endfor %}
+      <button id= "registerButton" class="linkButton" type="submit">Register</button>
+    </form>
+</div>
+{% endblock %}
