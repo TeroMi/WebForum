@@ -8,9 +8,14 @@
 
 {% block content %}
 <div id="main">
-<h2>
-  Welcome to WebForum
-</h2>
-<p>You can select a category from top or browse them <a href="#">here</a></p>
+    <h2>
+      Welcome to WebForum
+    </h2>
+    {%if user.is_authenticated %}
+        <p>You can select a category from top or browse them <a href="#">here</a></p>
+    {% else %}
+        <p>You must have a user to add content or comment on forums, you can register <a href="{%url% 'register'}">here</a></p>
+        <p>Existing user? You can sign in <a href="{%url% 'login'}">here</a></p>
+    {% endif %}
 </div>
 {% endblock %}

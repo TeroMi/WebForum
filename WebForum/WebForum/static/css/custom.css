@@ -1,9 +1,10 @@
 body{
     background-color: #111;
+    color: #666;
 }
 
 p{
-    color: #444;
+    color: #666;
 }
 
 a:hover{

@@ -27,15 +27,15 @@
                             </ul>
                         </li>
                     </ul>
-                    {%if 1 is 0 %}
+                    {%if user.is_authenticated %}
                         <ul class="nav navbar-nav pull-right">
-                            <li class=""><a href="#">Profile</a></li>
-                            <li class=""><a href="#">Logout</a></li>
+                            <li class=""><a href="#">{{user.username}}</a></li>
+                            <li class=""><a href="{% url 'logout' %}">Logout</a></li>
                         </ul>
                     {% else %}
                         <ul class="nav navbar-nav pull-right">
-                            <li class=""><a href="#">Register</a></li>
-                            <li class=""><a href="#">Login</a></li>
+                            <li class=""><a href="{% url 'register' %}">Register</a></li>
+                            <li class=""><a href="{% url 'login' %}">Login</a></li>
                         </ul>
                     {% endif %}
                 </div>
