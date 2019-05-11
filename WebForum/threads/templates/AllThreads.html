@@ -7,6 +7,22 @@
 
 {% block title %}<!-- Title -->{% endblock %}
 
-{% block content %}
 
+{% block content %}
+<h1>All Threads</h1>
+<div style="border:1px solid white;" class="container" id="mainThreadBlock">
+{% for cat in categories%}
+{{ cat.Name }}
+<ol>
+    <li></li>
+</ol>
+{% endfor %}
+</div>
+
+{% for thread in threads%}
+<img src="{{ thread.Content.Image }}" />
+<ol>
+    <li></li>
+</ol>
+{% endfor %}
 {% endblock %}
