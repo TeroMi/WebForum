@@ -1,6 +1,11 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
-from home.forms import SignUpForm
+from .forms import SignUpForm
+from threads.models import Category
+
+def index(request):
+    all_categories = Category.objects.all()
+    return render(request, 'home.html', {'categories': all_categories})
 
 def register(request):
     if request.method == 'POST':

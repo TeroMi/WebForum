@@ -12,17 +12,17 @@ class SignUpForm(UserCreationForm):
         )
     first_name = forms.CharField(
         max_length=50,
-        required=True,
-        help_text="Required. 50 characters or fewer."
+        required=False,
+        help_text="Max 50 characters"
         )
     last_name = forms.CharField(
         max_length=50,
-        required=True,
-        help_text="Required. 50 characters or fewer."
+        required=False,
+        help_text="Max 50 characters"
         )
     email = forms.EmailField(
         max_length=150,
-        help_text='Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.'
+        help_text='Required. Max 150 characters. Letters, digits and @/./+/-/_ only.'
         )
 
     class Meta:

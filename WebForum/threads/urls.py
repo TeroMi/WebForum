@@ -8,5 +8,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('', views.allThreads, name='allThreads'),
-    path('create', views.createThread, name='createThread')
+    path('create/<str:categoryName>', views.createThread, name='createThread'),
+    path('<int:threadId>', views.thread, name='Thread'),
+    path('category/<str:categoryName>', views.categoryThreads, name="category")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

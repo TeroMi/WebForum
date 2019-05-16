@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block title %}<!-- Title -->{% endblock %}
+
+{% block categories %}
+    {% for category in categories %}
+        <li><a href="{% url 'category' category.Name %}">{{ category.Name }}</a></li>
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+<h1>{{ thread.Title }}</h1>
+    <div style="" class="container" id="threadBlock">
+        <div class="contentHeader">
+            <h3>{{ thread.Content.Header }}</h3>
+        </div>
+        <div class="contentText">
+            {{ thread.Content.Text }}
+        </div>
+        <img width='300px' id="threadImg" src="/media/content_images/{{ thread.Content.Image }}" />
+
+    </div>
+
+    <div class="threadActionButtons">
+        <a class="btn btn-dark"><i class="glyphicon glyphicon-arrow-up"></i></a>
+        <a class="btn btn-dark"><i class="glyphicon glyphicon-arrow-down"></i></a>
+        <a id="commentButton" class="btn btn-dark">Comment</a>
+    </div>
+    <div class="comments">
+        <h4>Comments</h4>
+        <small>None</small>
+    </div>
+{% endblock %}

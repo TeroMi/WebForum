@@ -1,20 +1,20 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load widget_tweaks  %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/register.css' %}">
 {% endblock %}
 
 {% block title %}Register{% endblock %}
 {% block content %}
-<div class="container">
+<div class="container" id="registerContainer">
     <h2>Register</h2>
     <form method="post">
       {% csrf_token %}
       {% for field in form %}
       <div class="fieldWrapper">
         {{ field.label_tag }}<br>
-        {{ field }}
+        {{ field | append_attr:"class:form-control bg-dark" }}
         {% if field.help_text %}
         <p class="helpText">{{ field.help_text }}</p>
         {% endif %}
@@ -23,7 +23,7 @@
         {% endfor %}
       </div>
       {% endfor %}
-      <button id= "registerButton" class="linkButton" type="submit">Register</button>
+      <button id= "registerButton" class="btn btn-dark" type="submit">Register</button>
     </form>
 </div>
 {% endblock %}

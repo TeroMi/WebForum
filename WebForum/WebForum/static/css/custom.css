@@ -90,3 +90,39 @@ input:focus{
     border-radius: 4px;
     padding:25px;
 }
+
+ol {
+    border:1px solid gray;
+    border-radius:3px;
+    list-style-type: none;
+}
+
+#allThreadsBlock, #threadBlock{
+    border:0px solid gray;
+    border-radius:3px;
+    padding-bottom: 20px;
+}
+
+.threadActionButtons{
+    margin-top: 10px;
+}
+
+.glyphicon-arrow-down{
+    color:red;
+}
+.glyphicon-arrow-up{
+    color:green;
+}
+
+#login_button{
+    margin-top:10px;
+}
+
+#loginContainer, #registerContainer{
+    padding-left:25%;
+    padding-right:25%;
+}
+
+ol:hover{
+    background-color: #444!important;
+}

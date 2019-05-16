@@ -7,11 +7,16 @@
 
 {% block title %}<!-- Title -->{% endblock %}
 
+{% block categories %}
+    {% for category in categories %}
+        <li><a href="{% url 'category' category.Name %}">{{ category.Name }}</a></li>
+    {% endfor %}
+{% endblock %}
 
 {% block content %}
 <h1>Create a new Thread</h1>
 <div class="container" id="createThreadContainer">
-<form class="bg-dark" action="{% url 'createThread' %}" method="post" enctype="multipart/form-data">
+<form class="bg-dark" action="{% url 'createThread' category %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="form-group">
         <label for="{{form.title.id_for_label}}">{{ form.title.label }}</label>
@@ -24,13 +29,14 @@
     <div class="form-group">
         <label for="{{form.text.id_for_label}}">{{ form.text.label }}</label>
         {{ form.text | append_attr:"class:form-control bg-dark" }}
+        <small>{{ form.text.help_text }}</small>
     </div>
     <div class="form-group">
         <label class="custom-file-upload" for="{{form.image.id_for_label }}">
             <i class="glyphicon glyphicon-upload"></i> {{ form.image.label }}
         </label>
         <span id="file_selected"></span>
-        {{ form.image | append_attr:"class:form-control" | append_attr:"onchange=imageChanged(this,event)"}}
+        {{ form.image | append_attr:"class:form-control" | append_attr:"onchange=imageChanged(this,event)" }}
     </div>
     <button class="btn btn-dark" type="submit">
         <i></i>Create Thread

@@ -6,7 +6,6 @@
 {% endblock %}
 
 {% block title %}All threads{% endblock %}
-
 {% block categories %}
     {% for category in categories %}
         <li><a href="{% url 'category' category.Name %}">{{ category.Name }}</a></li>
@@ -14,23 +13,19 @@
 {% endblock %}
 
 {% block content %}
-    <h1>All Threads</h1>
+    <h1>{{ category }}</h1>
+
     <div style="" class="container" id="allThreadsBlock">
-    {% for category, threads in threadsByCategory%}
-        <h3>{{ category }}</h3>
-        {% for thread in threads %}
-            {% if forloop.counter0 < 5%}
+    <a class="btn btn-dark" href="{% url 'createThread' category %}">Create New Thread</a>
+    {% for thread in threads%}
                 <ol>
-                <a href="{% url 'Thread' thread.id %}">
+                <a class="thread_bar" href="{% url 'Thread' thread.id %}">
                     <li>
                         <div> Title: {{ thread.Title }}</div>
                         <div> Created: {{ thread.CreateDate }}</div>
                     </li>
                 </a>
                 </ol>
-            {% endif %}
-        {% endfor %}
-        <a class="btn btn-dark" href="{% url 'category' category %}">See more threads from this topic</a>
     {% endfor %}
     </div>
 {% endblock %}

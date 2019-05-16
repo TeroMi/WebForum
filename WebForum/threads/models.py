@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
 from django.utils import timezone
+from django.conf import settings
+import os
 # Create your models here.
 
 class Thread(models.Model):
@@ -51,7 +53,7 @@ class Content(models.Model):
     Header = models.CharField(max_length=80, blank=False, default="Your header for content")
     Text = models.TextField(blank=False)
     CodeSnippet = models.TextField(blank=True)
-    Image = models.ImageField(null=True, blank=True, upload_to='content_images/')
+    Image = models.ImageField(null=True, blank=True, upload_to='content_images')
     ExternalLink = models.URLField(blank=True)
     @classmethod
     def createContent(cls, header, text, codesnippet, image, link):
