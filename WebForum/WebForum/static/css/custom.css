@@ -126,3 +126,17 @@ ol {
 ol:hover{
     background-color: #444!important;
 }
+
+.card{
+    border: 1px solid gray!important;
+    border-radius: 4px!important;
+    padding: 5px!important;
+}
+
+.comments{
+    padding-bottom:50px;
+}
+
+#comment{
+    padding:10px 0px 10px 15px;
+}

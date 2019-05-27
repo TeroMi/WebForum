@@ -1,6 +1,9 @@
-from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404
 from bs4 import BeautifulSoup
-from .models import Category, Thread, Content
+from django.views.decorators.http import require_http_methods
+from django.contrib.auth.models import User
+from .models import Category, Thread, Content, Comment
 from .forms import ThreadForm
 from django.shortcuts import redirect
 from collections import defaultdict
@@ -20,7 +23,7 @@ def allThreads(request):
     return render(request, "AllThreads.html", {'categories': Category.objects.all(),
                                                'threads': threads, 'threadsByCategory': threadsByCategory.items()})
 
-
+@login_required
 def createThread(request, categoryName):
     category = categoryName
     print(category)
@@ -50,12 +53,63 @@ def createThread(request, categoryName):
 
 def thread(request, threadId):
     current_thread = Thread.objects.get(id=threadId)
+    comments = Comment.objects.filter(Thread__id=threadId)
+    return render(request, "Thread.html", {'categories': Category.objects.all(), 'thread': current_thread, 'comments': set(comments) })
 
-    return render(request, "Thread.html", {'categories': Category.objects.all(), 'thread': current_thread})
+
+@login_required
+def upvoteThread(request, threadId):
+    thr = Thread.objects.get(id=threadId)
+    loggedUser = request.user
+
+    if thr.UpVoters.filter(id=loggedUser.id):
+        thr.Upvotes -= 1
+        thr.UpVoters.remove(loggedUser)
+        thr.save()
+    elif thr.DownVoters.filter(id=loggedUser.id):
+        thr.Downvotes -= 1
+        thr.DownVoters.remove(loggedUser)
+        thr.Upvotes += 1
+        thr.UpVoters.add(loggedUser)
+        thr.save()
+    else:
+        thr.Upvotes += 1
+        thr.UpVoters.add(loggedUser)
+        thr.save()
+    return redirect('/threads/{}'.format(threadId))
+
+@login_required
+def downvoteThread(request, threadId):
+    thr = Thread.objects.get(id=threadId)
+    loggedUser = request.user
+
+    if thr.DownVoters.filter(id=loggedUser.id):
+        thr.Downvotes -= 1
+        thr.DownVoters.remove(loggedUser)
+        thr.save()
+    elif thr.UpVoters.filter(id=loggedUser.id):
+        thr.Upvotes -= 1
+        thr.UpVoters.remove(loggedUser)
+        thr.Downvotes += 1
+        thr.DownVoters.add(loggedUser)
+        thr.save()
+    else:
+        thr.Downvotes += 1
+        thr.DownVoters.add(loggedUser)
+        thr.save()
+    return redirect('/threads/{}'.format(threadId))
 
 
 def categoryThreads(request, categoryName):
     current_category = Category.objects.get(Name=categoryName.capitalize())
-    print(current_category)
     category_threads = Thread.objects.filter(Category=current_category)
     return render(request, 'CategoryThreads.html', {'categories': Category.objects.all(), 'threads': category_threads, 'category': current_category.Name})
+
+def comment(request):
+    commentText = request.POST["comment"]
+    while commentText != BeautifulSoup(commentText, features="lxml").get_text():
+        commentText = BeautifulSoup(commentText, features="lxml").get_text()
+    url = request.POST["url"]
+    thread = Thread.objects.get(id=request.POST["id"])
+    comment = Comment.createComment(request.user, commentText, thread)
+    return redirect(url)

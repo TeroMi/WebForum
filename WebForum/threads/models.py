@@ -15,7 +15,8 @@ class Thread(models.Model):
     Category = models.ForeignKey('Category', on_delete=models.CASCADE)
     Upvotes = models.IntegerField(default=0)
     Downvotes = models.IntegerField(default=0)
-
+    UpVoters = models.ManyToManyField(User, related_name='upvoters')
+    DownVoters = models.ManyToManyField(User, related_name='downvoters')
     @classmethod
     def createThread(cls, author, title, content, category):
         thread = cls(Author = author,
@@ -26,12 +27,22 @@ class Thread(models.Model):
         return thread
 
 class Comment(models.Model):
-    SendTime = models.DateTimeField(null=False, blank=False)
+    SendTime = models.DateTimeField(null=False, blank=False, default=timezone.now)
     Sender = models.ForeignKey(User, on_delete=models.CASCADE)
     Text = models.TextField()
     Thread = models.ForeignKey('Thread', on_delete=models.CASCADE)
     Upvotes = models.IntegerField(default=0)
     Downvotes = models.IntegerField(default=0)
+
+    @classmethod
+    def createComment(cls, sender, commentText, thread):
+        comment = cls(
+            Sender=sender,
+            Text=commentText,
+            Thread=thread
+        )
+        comment.save()
+        return comment
 
 
 class CategoryManager(models.Manager):
