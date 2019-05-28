@@ -13,8 +13,8 @@ In repository folder install pipenv packages from Pipfile running command
 `pipenv install`  
 
 Once all packages are succesfully installed, before running change to Django app folder (where manage.py resides) and run the migrations  
-`pipenv run python manage.py makemigrations`  
-and    
+(Just in case, migration files are included so just migrate should be enough) `pipenv run python manage.py makemigrations`  
+    
 `pipenv run python manage.py migrate`  
 
 After the migrations are done you can run the server  
@@ -35,3 +35,4 @@ In your browser go to localhost:8000 to access the WebForum
 - Rich text editor for both creation of threads and comments
 - Login expiration
 - Change database to MySQL, PostgreSQL etc. 
+- Latest entry to a topic
