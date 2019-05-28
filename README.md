@@ -13,8 +13,9 @@ In repository folder install pipenv packages from Pipfile running command
 `pipenv install`  
 
 Once all packages are succesfully installed, before running change to Django app folder (where manage.py resides) and run the migrations  
-(Just in case, migration files are included so just migrate should be enough) `pipenv run python manage.py makemigrations`  
-    
+(Just in case, migration files are included so just migrate should be enough)  
+`pipenv run python manage.py makemigrations`  
+then      
 `pipenv run python manage.py migrate`  
 
 After the migrations are done you can run the server  
