@@ -21,10 +21,12 @@
     <div class="form-group">
         <label for="{{form.title.id_for_label}}">{{ form.title.label }}</label>
         {{ form.title | append_attr:"class:form-control bg-dark" }}
+        <small>{{ form.title.help_text }}</small>
     </div>
     <div class="form-group">
         <label for="{{form.header.id_for_label}}">{{ form.header.label }}</label>
         {{ form.header | append_attr:"class:form-control bg-dark" }}
+        <small>{{ form.header.help_text }}</small>
     </div>
     <div class="form-group">
         <label for="{{form.text.id_for_label}}">{{ form.text.label }}</label>
@@ -37,6 +39,7 @@
         </label>
         <span id="file_selected"></span>
         {{ form.image | append_attr:"class:form-control" | append_attr:"onchange=imageChanged(this,event)" }}
+        <small>{{ form.image.help_text }}</small>
     </div>
     <button class="btn btn-dark" type="submit">
         <i></i>Create Thread

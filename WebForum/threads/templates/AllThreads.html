@@ -16,7 +16,7 @@
 {% block content %}
     <div style="" class="container" id="allThreadsBlock">
     <h1>All Threads</h1>
-
+    {% if threadsByCategory %}
     {% for category, threads in threadsByCategory%}
         <h3>{{ category }}</h3>
         {% if threads %}
@@ -33,9 +33,16 @@
                 {% endif %}
             {% endfor %}
         {% else %}
-            <h3>No threads in this category</h3>
+            <h4>No threads in this category yet</h4>
         {% endif %}
-        <a class="btn btn-dark" href="{% url 'category' category %}">See more threads from this topic</a>
+        <a class="btn btn-dark" href="{% url 'category' category %}">Go to category page</a>
     {% endfor %}
+    {% else %}
+        {% for category in categories %}
+            <h3>{{ category.Name }}</h3>
+            <h4>No threads in this category yet</h4>
+            <a class="btn btn-dark" href="{% url 'category' category.Name %}">Go to category page </a>
+        {% endfor %}
+    {% endif %}
     </div>
 {% endblock %}

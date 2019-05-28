@@ -15,11 +15,19 @@ from django.conf import settings
 
 def allThreads(request):
     threads = Thread.objects.all()
-
+    categories = Category.objects.all()
     threadsByCategory = defaultdict(list)
-    for thread in threads:
-        category = thread.Category.Name
-        threadsByCategory[category].append(thread)
+
+    for category in categories:
+        if threads:
+            for thread in threads:
+                if category.Name == thread.Category.Name:
+                    threadsByCategory[category.Name].append(thread)
+                else:
+                    print(category.Name)
+                    threadsByCategory[category.Name] = []
+
+    print(threadsByCategory)
     return render(request, "AllThreads.html", {'categories': Category.objects.all(),
                                                'threads': threads, 'threadsByCategory': threadsByCategory.items()})
 
