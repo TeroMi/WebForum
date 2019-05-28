@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+{% endblock %}
+
+{% block title %}Home{% endblock %}
+
+{% block categories %}
+    {% for category in categories %}
+        <li><a href="{% url 'category' category.Name %}">{{ category.Name }}</a></li>
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+<div id="main">
+    <h2>
+      Welcome to WebForum
+    </h2>
+    {%if user.is_authenticated %}
+        <p>You can select a category from top or browse them <a href="{% url 'allThreads' %}">here</a></p>
+    {% else %}
+        <p>You must have a user to add content or comment on forums, you can register <a href="{% url 'register' %}">here</a></p>
+        <p>Existing user? You can sign in <a href="{%url 'login'%}">here</a></p>
+    {% endif %}
+</div>
+{% endblock %}

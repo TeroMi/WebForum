@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load threads_tags %}
+{% block head %}
+
+{% endblock %}
+
+{% block title %}All threads{% endblock %}
+
+{% block categories %}
+    {% for category in categories %}
+        <li><a href="{% url 'category' category.Name %}">{{ category.Name }}</a></li>
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+    <div style="" class="container" id="allThreadsBlock">
+    <h1>All Threads</h1>
+    {% if threadsByCategory %}
+    {% for category, threads in threadsByCategory%}
+        <h3>{{ category }}</h3>
+        {% if threads %}
+            {% for thread in threads %}
+                {% if forloop.counter0 < 5%}
+                    <ol>
+                    <a href="{% url 'Thread' thread.id %}">
+                        <li>
+                            <div> Title: {{ thread.Title }}</div>
+                            <div> Created: {{ thread.CreateDate }}</div>
+                        </li>
+                    </a>
+                    </ol>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <h4>No threads in this category yet</h4>
+        {% endif %}
+        <a class="btn btn-dark" href="{% url 'category' category %}">Go to category page</a>
+    {% endfor %}
+    {% else %}
+        {% for category in categories %}
+            <h3>{{ category.Name }}</h3>
+            <h4>No threads in this category yet</h4>
+            <a class="btn btn-dark" href="{% url 'category' category.Name %}">Go to category page </a>
+        {% endfor %}
+    {% endif %}
+    </div>
+{% endblock %}

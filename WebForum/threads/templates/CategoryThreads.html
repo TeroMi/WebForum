@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load threads_tags %}
+{% block head %}
+
+{% endblock %}
+
+{% block title %}All threads{% endblock %}
+{% block categories %}
+    {% for category in categories %}
+        <li><a href="{% url 'category' category.Name %}">{{ category.Name }}</a></li>
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ category }}</h1>
+
+    <div style="" class="container" id="allThreadsBlock">
+    <a class="btn btn-dark" href="{% url 'createThread' category %}">Create New Thread</a>
+    {% for thread in threads%}
+                <ol>
+                <a class="thread_bar" href="{% url 'Thread' thread.id %}">
+                    <li>
+                        <div> Title: {{ thread.Title }}</div>
+                        <div> Created: {{ thread.CreateDate }}</div>
+                    </li>
+                </a>
+                </ol>
+    {% endfor %}
+    </div>
+{% endblock %}
