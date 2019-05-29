@@ -37,3 +37,4 @@ In your browser go to localhost:8000 to access the WebForum
 - Login expiration
 - Change database to MySQL, PostgreSQL etc. 
 - Latest entry to a topic
+- Google sign in
