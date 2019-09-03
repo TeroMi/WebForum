@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'bs4',
     'widget_tweaks',
     'threads.templatetags',
+    'requests',
 ]
 
 MIDDLEWARE = [

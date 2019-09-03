@@ -11,6 +11,7 @@ lxml = "*"
 "beautifulsoup4" = "*"
 pillow = "*"
 django-widget-tweaks = "*"
+requests = "*"
 
 [dev-packages]
 
